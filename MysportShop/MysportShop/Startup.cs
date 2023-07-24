@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
+using MysportShop.Models;
 
 namespace MysportShop
 {
@@ -15,7 +16,9 @@ namespace MysportShop
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddTransient<IProductRepository, FakeProductsRepository>();
             services.AddMvc();
+            
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -33,7 +36,11 @@ namespace MysportShop
             app.UseDeveloperExceptionPage();
             app.UseStatusCodePages();
             app.UseStaticFiles();
-            app.UseMvc(routes => { });
+            app.UseMvc(routes => { 
+            routes.MapRoute(
+            name: "default",
+            template: "{controller=Product}/{action=List}/{id?}");
+            });
         }
     }
 }
