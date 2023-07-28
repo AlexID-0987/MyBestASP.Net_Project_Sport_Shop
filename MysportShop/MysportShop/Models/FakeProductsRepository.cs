@@ -9,8 +9,8 @@ namespace MysportShop.Models
     {
         public IQueryable<MyProduct> _Products => new List<MyProduct>
         {
-            new MyProduct{NameProduct="Shase",Price=3457},
-            new MyProduct{NameProduct="Tea",Price=347},
+            new MyProduct{Id=1,NameProduct="Shase",InfoWithProduct="Hand", Price=3457},
+            new MyProduct{Id=2, NameProduct="Tea",InfoWithProduct="Eat", Price=347},
         }.AsQueryable<MyProduct>();
     }
 }
