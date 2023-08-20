@@ -43,6 +43,7 @@ namespace MysportShop
             app.UseDeveloperExceptionPage();
             app.UseStatusCodePages();
             app.UseStaticFiles();
+            
             app.UseMvc(routes => { 
             routes.MapRoute(
             name: "default",

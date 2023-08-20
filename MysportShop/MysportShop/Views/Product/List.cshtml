@@ -1,9 +1,15 @@
-﻿@model IEnumerable<MyProduct>
+﻿
+@model IEnumerable<MysportShop.Models.MyProduct>
 
+
+@addTagHelper *,Microsoft.AspNetCore.Mvc.TagHelpers
 <h2>List</h2>
-
+@{
+    ViewData["Title"] = "List";
+}
 
 <div class="container">
+
     <table class="table table-dark table-hover">
         <thead>
             <tr>
@@ -14,15 +20,27 @@
             </tr>
         </thead>
         <tbody>
-            @foreach (var listItem in Model)
+
+            @foreach (var listIt in Model)
             {
                 <tr>
-                    <td>@listItem.Id</td>
-                    <td>@listItem.NameProduct</td>
-                    <td>@listItem.InfoWithProduct</td>
-                    <td>@listItem.Price.ToString("c")</td>
+                    <td>@listIt.Id</td>
+                    <td>@listIt.NameProduct</td>
+                    <td>@listIt.InfoWithProduct</td>
+                    <td>@listIt.Price.ToString("c")</td>
                 </tr>
             }
+
         </tbody>
+        @if (ViewBag.Page1.Increment)
+        {
+            <a asp-action="List" asp-route-page="@(ViewBag.Page1.PageNumber-1)" class="btn btn-success">Decrement</a>
+        }
+        @if (ViewBag.Page1.Decrement)
+        {
+            <a asp-action="List" asp-route-page="@(ViewBag.Page1.PageNumber+1)" class="btn btn-success">Increment</a>
+        }
     </table>
-    </div>
+    <h1>@ViewBag.PageNumber</h1>
+    <a href="Product/Index">Index</a>
+</div>

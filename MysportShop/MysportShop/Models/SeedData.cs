@@ -19,17 +19,52 @@ namespace MysportShop.Models
                 context.Products.AddRange(
                 new MyProduct
                 {
-                    Id=1,
+                   
                     NameProduct="Board",
-                    InfoWithProduct="Sea",
+                    InfoWithProduct="Seajggkg",
                     Price=543
                 },
                 new MyProduct
                 {
-                    Id=2,
+                    
                     NameProduct = "tree",
                     InfoWithProduct = "Forest",
                     Price = 1543
+                },
+                new MyProduct
+                {
+
+                    NameProduct = "tree",
+                    InfoWithProduct = "Forestkjlk",
+                    Price = 1543
+                },
+                new MyProduct
+                {
+
+                    NameProduct = "treejhgg",
+                    InfoWithProduct = "Forest",
+                    Price = 561543
+                },
+                new MyProduct
+                {
+
+                    NameProduct = "tree9",
+                    InfoWithProduct = "Forest",
+                    Price = 189543
+                },
+                new MyProduct
+                {
+
+                    NameProduct = "treaaaaaascg",
+                    InfoWithProduct = "Forest",
+                    Price = 561543
+                },
+                new MyProduct
+                {
+
+                    NameProduct = "tree9",
+                    InfoWithProduct = "Forest",
+                    Price = 18932543
                 });
                 context.SaveChanges();
             }
