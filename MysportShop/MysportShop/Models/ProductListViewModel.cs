@@ -9,5 +9,6 @@ namespace MysportShop.Models
     {
         public IEnumerable<MyProduct> myProducts { get; set; }
         public ListPagination ListPagination { get; set; }
+        public string CurrentCategory { get; set; }
     }
 }

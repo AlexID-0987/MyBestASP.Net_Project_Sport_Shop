@@ -13,6 +13,7 @@ namespace MysportShop.Models
         public string NameProduct { get; set; }
         public string InfoWithProduct { get; set; }
         public decimal Price { get; set; }
+        public string Categories { get; set; }
     }
 }
 //create model product

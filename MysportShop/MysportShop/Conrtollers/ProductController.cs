@@ -10,7 +10,7 @@ namespace MysportShop.Conrtollers
     public class ProductController : Controller
     {
         private IProductRepository product;
-
+        
 
         public int PageSize = 4;
         
@@ -35,22 +35,27 @@ namespace MysportShop.Conrtollers
         });
         */
         
-        public async Task <IActionResult> List(int page = 1)
+        public async Task <IActionResult> List(string category,int page = 1)
         {
 
             var item1 = product._Products.ToList();
             var count = item1.Count();
+            Mycategories s = new Mycategories();
+            
             int size = 2;
-            var pag1 = item1.Skip((page - 1) * size).Take(size).ToList();
+            var pag1 = item1.Where(p=>category==null||p.Categories==category).Skip((page - 1) * size).Take(size).ToList();
             Pagination pagination1 = new Pagination(count, page, size);
             PaginationData paginationData = new PaginationData
             {
                 Pagination= pagination1,
                 myProducts = pag1
             };
+
+            
             ViewBag.Count = count;
             ViewBag.Page1 = pagination1;
             ViewBag.PageNumber = page;
+            ViewBag.Cat = category;
             return View(pag1);
         }
         
@@ -70,6 +75,16 @@ namespace MysportShop.Conrtollers
             ViewBag.Page = pagination;
             ViewBag.PageNumber = page;
             return View(pag);
+        }
+        [HttpPost]
+        public IActionResult ChoiceProduct()
+        {
+            var form = Request.Form;
+            var item = form["sel"];
+            ViewBag.My = item;
+            var item1 = product._Products.ToList();
+            var pag1 = item1.Where(p => p.Categories == item);
+            return View(pag1);
         }
     }
 }

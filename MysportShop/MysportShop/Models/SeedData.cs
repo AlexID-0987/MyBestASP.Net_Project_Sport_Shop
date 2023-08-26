@@ -22,49 +22,64 @@ namespace MysportShop.Models
                    
                     NameProduct="Board",
                     InfoWithProduct="Seajggkg",
-                    Price=543
+                    Price=543,
+                    Categories="Sport"
                 },
                 new MyProduct
                 {
                     
                     NameProduct = "tree",
                     InfoWithProduct = "Forest",
-                    Price = 1543
+                    Price = 1543,
+                    Categories="Nature"
                 },
                 new MyProduct
                 {
 
                     NameProduct = "tree",
                     InfoWithProduct = "Forestkjlk",
-                    Price = 1543
+                    Price = 1543,
+                    Categories="Nature"
                 },
                 new MyProduct
                 {
 
                     NameProduct = "treejhgg",
                     InfoWithProduct = "Forest",
-                    Price = 561543
+                    Price = 561543,
+                    Categories="Nature"
                 },
                 new MyProduct
                 {
 
                     NameProduct = "tree9",
                     InfoWithProduct = "Forest",
-                    Price = 189543
+                    Price = 189543,
+                    Categories="Nature"
                 },
                 new MyProduct
                 {
 
                     NameProduct = "treaaaaaascg",
                     InfoWithProduct = "Forest",
-                    Price = 561543
+                    Price = 561543,
+                    Categories="Nature"
+                },
+                new MyProduct
+                {
+
+                    NameProduct = "treaaaaaascg",
+                    InfoWithProduct = "Forest",
+                    Price = 561543,
+                    Categories="Nature"
                 },
                 new MyProduct
                 {
 
                     NameProduct = "tree9",
                     InfoWithProduct = "Forest",
-                    Price = 18932543
+                    Price = 18932543,
+                    Categories="Nature"
                 });
                 context.SaveChanges();
             }
