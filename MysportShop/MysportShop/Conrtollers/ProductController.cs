@@ -82,8 +82,11 @@ namespace MysportShop.Conrtollers
             var form = Request.Form;
             var item = form["sel"];
             ViewBag.My = item;
+            int pageSize = 3;
             var item1 = product._Products.ToList();
             var pag1 = item1.Where(p => p.Categories == item);
+            var countCategory = pag1.Count();
+            ViewBag.Count = countCategory;
             return View(pag1);
         }
     }
