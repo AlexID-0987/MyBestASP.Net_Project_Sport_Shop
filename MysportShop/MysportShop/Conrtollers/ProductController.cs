@@ -2,14 +2,17 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using MysportShop.Models;
+using Newtonsoft.Json;
 
 namespace MysportShop.Conrtollers
 {
     public class ProductController : Controller
     {
         private IProductRepository product;
+        private IBuyRepository _buyRepository;
         
 
         public int PageSize = 4;
@@ -88,6 +91,59 @@ namespace MysportShop.Conrtollers
             var countCategory = pag1.Count();
             ViewBag.Count = countCategory;
             return View(pag1);
+        }
+       
+        public IActionResult Buy(int id, MyProduct my)
+        {
+            BuyProduct buyProduct = new BuyProduct();
+            var productItem = product._Products.ToList();
+            var oneproduct = productItem.Where(i => i.Id == id);
+            int myId = id;
+            var count=oneproduct.Count();
+            int quantity = buyProduct.Quantity;
+            ViewBag.count = count;
+            ViewBag.ID = myId;
+            ViewBag.Quantity = quantity;
+            return View(oneproduct);
+        }
+        [HttpPost]
+        public IActionResult Order(int id)
+        {
+            
+            var form = Request.Form;
+            string na = form["name"];
+            string Id = form["id"];
+            int id1 = Convert.ToInt32(Id);
+            string info = form["info"];
+            string price = form["price"];
+            double price1 = Convert.ToDouble(price);
+            string categories = form["categories"];
+            string quantityStr = form["quantity"];
+            int quantity = Convert.ToInt32(quantityStr);
+            int i = id;
+            List<BuyProduct> buyProducts = new List<BuyProduct>()
+            {
+                new BuyProduct(){Id=id,NameProduct=na,InfoWithProduct=info,}
+            };
+            List<BuyProduct> newMySesion = new List<BuyProduct>();
+            BuyProduct buy = new BuyProduct();
+            double quant = buy.QuantityToPrice(price1,quantity);
+            ViewBag.name = i;
+            ViewBag.na = na;
+            ViewBag.Id = Id;
+            ViewBag.info = info;
+            ViewBag.price = price;
+            ViewBag.categories = categories;
+            ViewBag.quantity = quantity;
+            ViewBag.func = quant;
+            HttpContext.Session.SetString("My","This is sesion");
+            ViewBag.ses = HttpContext.Session.GetString("My");
+            HttpContext.Session.SetString("My", $"{info}");
+            ViewBag.ses1 = HttpContext.Session.GetString("My");
+            HttpContext.Session.SetString("MyList", JsonConvert.SerializeObject(buyProducts));
+            newMySesion = JsonConvert.DeserializeObject<List<BuyProduct>>(HttpContext.Session.GetString("MyList"));
+            
+            return View(newMySesion); 
         }
     }
 }

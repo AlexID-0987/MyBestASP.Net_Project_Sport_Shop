@@ -25,6 +25,11 @@ namespace MysportShop
                Configuration["Data:SportStore:DefaultConnection"]));
             services.AddTransient<IProductRepository, EFProductRepo>();
             services.AddMvc();
+            services.AddMemoryCache();
+            services.AddSession(options=> 
+            {
+                options.IdleTimeout = TimeSpan.FromSeconds(30);
+            });
             
         }
 
@@ -43,7 +48,7 @@ namespace MysportShop
             app.UseDeveloperExceptionPage();
             app.UseStatusCodePages();
             app.UseStaticFiles();
-            
+            app.UseSession();
             app.UseMvc(routes => { 
             routes.MapRoute(
             name: "default",

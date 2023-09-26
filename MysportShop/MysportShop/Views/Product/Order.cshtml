@@ -1,0 +1,23 @@
+﻿@model IEnumerable<MysportShop.Models.BuyProduct>
+@{
+    ViewData["Title"] = "Order";
+}
+
+<h2>Order</h2>
+
+<h1>Hahaha</h1>
+<h1>@ViewBag.na</h1>
+<h1>@ViewBag.Id</h1>
+<h1>@ViewBag.info</h1>
+<h1>@ViewBag.price</h1>
+<h1>@ViewBag.categories</h1>
+<h1>@ViewBag.quantity</h1>
+<h1>@ViewBag.ses</h1>
+@foreach (var i in Model)
+{
+    <h1>@i.InfoWithProduct</h1>
+    <h1>@ViewBag.func.ToString("c")</h1>
+   
+};
+
+<h1>@ViewBag.ses1</h1>

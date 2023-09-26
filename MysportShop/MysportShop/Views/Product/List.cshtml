@@ -33,6 +33,7 @@
                 <th>Info</th>
                 <th>Price</th>
                 <th>Categories</th>
+                <th>Buy</th>
             </tr>
         </thead>
         <tbody>
@@ -45,6 +46,9 @@
                     <td>@listIt.InfoWithProduct</td>
                     <td>@listIt.Price.ToString("c")</td>
                     <td>@listIt.Categories</td>
+                    <td>
+                        <a href="Product/Buy/@listIt.Id" value="{@listIt.Id}" class="btn btn-success">Buy</a>
+                    </td>
                 </tr>
             }
 

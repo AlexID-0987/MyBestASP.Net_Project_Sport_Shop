@@ -1,0 +1,68 @@
+﻿@model IEnumerable<MysportShop.Models.MyProduct>
+@addTagHelper *,Microsoft.AspNetCore.Mvc.TagHelpers
+
+@{
+    ViewData["Title"] = "Buy";
+}
+
+<h2>Buy</h2>
+<h1>@ViewBag.ID</h1>
+<h1>@ViewBag.count</h1>
+<div class="container">
+    <container>
+        
+                @foreach (var listIt in Model)
+                {
+                    
+                    <form asp-action="Order" method="post">
+                        <div>
+                            <div class="form-group">
+                                <div style="text-align:center">
+                                <label class="form-label">Id</label>
+                                </div>
+                                <input type="text" value="@listIt.Id" name="id" readonly class="form-control" style="background-color:bisque"/>
+                            </div>
+                            <div class="form-group">
+                                <div style="text-align:center">
+                                    <label class="form-label">Name</label>
+                                </div>
+                                <input type="text" value="@listIt.NameProduct" readonly class="form-control" name="name" style="background-color:bisque"/>
+                            </div>
+                            <div class="form-group">
+                                <div style="text-align:center">
+                                    <label class="form-label">Info</label>
+                                </div>
+                                <input type="text" value="@listIt.InfoWithProduct" readonly class="form-control" name="info" style="background-color:bisque" />
+                            </div>
+                            <div class="form-group">
+                                <div style="text-align:center">
+                                    <label class="form-label">Price</label>
+                                </div>
+                                <input type="text" value="@listIt.Price" readonly class="form-control" name="price" style="background-color:bisque"/>
+                            </div>
+                            <div class="form-group">
+                                <div style="text-align:center">
+                                    <label class="form-label">Categories</label>
+                                </div>
+                                <input type="text" value="@listIt.Categories" readonly  class="form-control" name="categories" style="background-color:bisque"/>
+                            </div>
+                            <div class="form-group">
+                                <div style="text-align:center">
+                                    <label class="form-label">Quantity</label>
+                                </div>
+                                <input type="number"  class="form-control" value="1" name="quantity" min="1" style="background-color:bisque"/>
+                            </div>
+                            <div>
+                                <div style="text-align:center">
+                                    <label class="form-label">Send</label>
+                                </div>
+                                <input type="submit" class="form-control" style="background-color:cadetblue"/>
+                            </div>
+                        </div>
+                    </form>
+
+                }
+
+    </container>
+
+</div>
