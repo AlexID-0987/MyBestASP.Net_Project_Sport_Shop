@@ -7,6 +7,7 @@ namespace MysportShop.Models
 {
     public class BuyProduct:MyProduct
     {
+
         public int Quantity { get; set; } = 1;
         public decimal SummaOnsetProduct { get; set; }
 
@@ -14,6 +15,7 @@ namespace MysportShop.Models
         {
             return price * quantity;
         }
-
+        
+        
     }
 }

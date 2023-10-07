@@ -12,7 +12,7 @@ namespace MysportShop.Conrtollers
     public class ProductController : Controller
     {
         private IProductRepository product;
-        private IBuyRepository _buyRepository;
+        private IBuyRepository buyRepository;
         
 
         public int PageSize = 4;
@@ -106,44 +106,46 @@ namespace MysportShop.Conrtollers
             ViewBag.Quantity = quantity;
             return View(oneproduct);
         }
+        
+        
         [HttpPost]
-        public IActionResult Order(int id)
+        public IActionResult Order(int id, BuyProduct buyProduct)
         {
             
-            var form = Request.Form;
-            string na = form["name"];
-            string Id = form["id"];
-            int id1 = Convert.ToInt32(Id);
-            string info = form["info"];
-            string price = form["price"];
-            double price1 = Convert.ToDouble(price);
-            string categories = form["categories"];
-            string quantityStr = form["quantity"];
-            int quantity = Convert.ToInt32(quantityStr);
-            int i = id;
-            List<BuyProduct> buyProducts = new List<BuyProduct>()
-            {
-                new BuyProduct(){Id=id,NameProduct=na,InfoWithProduct=info,}
-            };
-            List<BuyProduct> newMySesion = new List<BuyProduct>();
-            BuyProduct buy = new BuyProduct();
-            double quant = buy.QuantityToPrice(price1,quantity);
-            ViewBag.name = i;
-            ViewBag.na = na;
-            ViewBag.Id = Id;
-            ViewBag.info = info;
-            ViewBag.price = price;
-            ViewBag.categories = categories;
-            ViewBag.quantity = quantity;
-            ViewBag.func = quant;
-            HttpContext.Session.SetString("My","This is sesion");
-            ViewBag.ses = HttpContext.Session.GetString("My");
-            HttpContext.Session.SetString("My", $"{info}");
-            ViewBag.ses1 = HttpContext.Session.GetString("My");
-            HttpContext.Session.SetString("MyList", JsonConvert.SerializeObject(buyProducts));
-            newMySesion = JsonConvert.DeserializeObject<List<BuyProduct>>(HttpContext.Session.GetString("MyList"));
             
-            return View(newMySesion); 
+            BuyProduct buyProduct1 = new BuyProduct();
+            double summa= buyProduct1.QuantityToPrice(Convert.ToDouble(buyProduct.Price), Convert.ToInt32(buyProduct.Price));
+
+            var cart = GetCart();
+            cart.AddItemMyProduct(buyProduct.Id, buyProduct.NameProduct, buyProduct.InfoWithProduct, buyProduct.Price, buyProduct.Categories, buyProduct.Quantity, buyProduct.SummaOnsetProduct);
+            HttpContext.Session.SetJson("Cart", cart);
+
+            
+
+            //return View(mylist); 
+            return Redirect("List");
+            
+        }
+
+        public IActionResult MySessionList()
+        {
+            var cart = GetCart();
+            return View(new CartIndexViewModel
+            {
+                BuyUseSession=cart
+            });
+
+        }
+
+        private BuyUseSession GetCart()
+        {
+            BuyUseSession buyUseSession = HttpContext.Session.GetJson<BuyUseSession>("Cart");
+            if (buyUseSession == null)
+            {
+                buyUseSession = new BuyUseSession();
+                HttpContext.Session.SetJson("Cart", buyUseSession);
+            }
+            return buyUseSession;
         }
     }
 }

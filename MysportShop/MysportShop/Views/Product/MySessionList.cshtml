@@ -1,0 +1,15 @@
+﻿@model MysportShop.Models.CartIndexViewModel
+@{
+    ViewData["Title"] = "MySessionList";
+}
+
+<h2>MySessionList</h2>
+<div class="container">
+<ul class="list-group list-group-flush">
+@foreach (var session in Model.BuyUseSession.BuyProducts)
+{
+    <li class="list-group-item">@session.Id, @session.NameProduct, @session.InfoWithProduct,@session.Price,@session.Categories,@session.Quantity,@session.SummaOnsetProduct</li>
+}
+</ul>
+<a href="List">List</a>
+</div>
