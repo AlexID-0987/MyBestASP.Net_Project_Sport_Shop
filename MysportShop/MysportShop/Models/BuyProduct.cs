@@ -11,7 +11,7 @@ namespace MysportShop.Models
         public int Quantity { get; set; } = 1;
         public decimal SummaOnsetProduct { get; set; }
 
-        public double QuantityToPrice(double price, int quantity)
+        public decimal QuantityToPrice(decimal price, int quantity)
         {
             return price * quantity;
         }

@@ -106,30 +106,34 @@ namespace MysportShop.Conrtollers
             ViewBag.Quantity = quantity;
             return View(oneproduct);
         }
-        
+        public decimal summa;
         
         [HttpPost]
         public IActionResult Order(int id, BuyProduct buyProduct)
         {
-            
-            
+
+            int quantity = Convert.ToInt32(buyProduct.Quantity);
+            decimal price = Convert.ToDecimal(buyProduct.Price);
             BuyProduct buyProduct1 = new BuyProduct();
-            double summa= buyProduct1.QuantityToPrice(Convert.ToDouble(buyProduct.Price), Convert.ToInt32(buyProduct.Price));
+            decimal summaProduct = buyProduct1.QuantityToPrice(price, quantity);
+             
 
             var cart = GetCart();
-            cart.AddItemMyProduct(buyProduct.Id, buyProduct.NameProduct, buyProduct.InfoWithProduct, buyProduct.Price, buyProduct.Categories, buyProduct.Quantity, buyProduct.SummaOnsetProduct);
+            cart.AddItemMyProduct(buyProduct.Id, buyProduct.NameProduct, buyProduct.InfoWithProduct, buyProduct.Price, buyProduct.Categories, quantity, summaProduct);
             HttpContext.Session.SetJson("Cart", cart);
 
-            
 
+            
             //return View(mylist); 
             return Redirect("List");
             
         }
-
+        
         public IActionResult MySessionList()
         {
+            
             var cart = GetCart();
+            
             return View(new CartIndexViewModel
             {
                 BuyUseSession=cart

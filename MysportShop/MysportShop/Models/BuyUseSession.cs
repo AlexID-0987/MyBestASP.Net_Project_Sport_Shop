@@ -11,18 +11,34 @@ namespace MysportShop.Models
         BuyProduct BuyProduct = new BuyProduct();
         public void AddItemMyProduct(int id, string nameProduct,string infoproduct, decimal price, string categories, int quantity, decimal summa)
         {
-            
-            buyProductsList.Add(new BuyProduct()
+            BuyProduct buy = buyProductsList.Where(a => a.Id == id).FirstOrDefault();
+            if (buy == null)
             {
-                Id = id,
-                NameProduct=nameProduct,
-                InfoWithProduct=infoproduct,
-                Price=price,
-                Categories=categories,
-                Quantity=quantity,
+                buyProductsList.Add(new BuyProduct()
+                {
+                    Id = id,
+                    NameProduct = nameProduct,
+                    InfoWithProduct = infoproduct,
+                    Price = price,
+                    Categories = categories,
+                    Quantity = quantity,
+                    SummaOnsetProduct = BuyProduct.QuantityToPrice(price,quantity)
+
+                });
+            }
+            else
+            {
+                buy.Quantity += quantity;
                 
-            });
+            }
+            
         }
+
+        public decimal TotalValue() =>
+            buyProductsList.Sum(e => e.Price * e.Quantity);
+        
+
+
         public IEnumerable<BuyProduct> BuyProducts => buyProductsList;
     }
 }
