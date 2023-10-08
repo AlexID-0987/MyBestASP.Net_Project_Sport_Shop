@@ -29,6 +29,7 @@ namespace MysportShop.Models
             else
             {
                 buy.Quantity += quantity;
+                buy.SummaOnsetProduct += price;
                 
             }
             
