@@ -16,7 +16,7 @@
                 <th>Categories</th>
                 <td>Quantity</td>
                 <td>Summa</td>
-
+                <td>Remove</td>
             </tr>
         </thead>
         <tbody>
@@ -31,7 +31,9 @@
                     <td>@listIt.Categories</td>
                     <td>@listIt.Quantity</td>
                     <td>@listIt.SummaOnsetProduct.ToString("c")</td>
-                    
+                    <td>
+                       <a href="~/Product/RemoveElement/@listIt.Id">Remove</a>
+                    </td>
                 </tr>
             }
             

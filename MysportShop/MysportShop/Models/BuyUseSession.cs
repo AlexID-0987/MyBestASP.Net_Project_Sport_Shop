@@ -34,6 +34,13 @@ namespace MysportShop.Models
             }
             
         }
+        
+        public void Removecart(int id)
+        {
+            
+            
+            buyProductsList.RemoveAll(a=>a.Id==id);
+        }
 
         public decimal TotalValue() =>
             buyProductsList.Sum(e => e.Price * e.Quantity);

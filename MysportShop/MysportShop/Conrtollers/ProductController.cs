@@ -140,6 +140,14 @@ namespace MysportShop.Conrtollers
             });
 
         }
+        public IActionResult RemoveElement(int id)
+        {
+            
+            var cart = GetCart();
+            cart.Removecart(id);
+            HttpContext.Session.SetJson("Cart", cart);
+            return View();
+        }
 
         private BuyUseSession GetCart()
         {
@@ -151,5 +159,6 @@ namespace MysportShop.Conrtollers
             }
             return buyUseSession;
         }
+
     }
 }
