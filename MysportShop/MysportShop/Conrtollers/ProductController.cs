@@ -2,9 +2,14 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Builder.Internal;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
 using MysportShop.Models;
+
 using Newtonsoft.Json;
 
 namespace MysportShop.Conrtollers
@@ -13,8 +18,10 @@ namespace MysportShop.Conrtollers
     {
         private IProductRepository product;
         private IBuyRepository buyRepository;
+        private BuyUseSession BuyUseSession;
         
-
+        
+        
         public int PageSize = 4;
         
 
@@ -148,6 +155,22 @@ namespace MysportShop.Conrtollers
             HttpContext.Session.SetJson("Cart", cart);
             return View();
         }
+        public IActionResult OrderProduct()
+        {
+            var Cart = GetCart();
+            
+            return View();
+        }
+        
+            
+        [HttpPost]
+        public async Task <IActionResult> OrderProduct(MyOrder order)
+        {
+            product.SaveOrderTable(order);
+            return Redirect ("List");
+
+        }
+        
 
         private BuyUseSession GetCart()
         {

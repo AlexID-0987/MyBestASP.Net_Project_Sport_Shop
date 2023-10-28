@@ -24,9 +24,13 @@ namespace MysportShop
             options.UseSqlServer(
                Configuration["Data:SportStore:DefaultConnection"]));
             services.AddTransient<IProductRepository, EFProductRepo>();
-            
+            services.AddDbContext<ProductDbContext>(options =>
+            options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+
+
             services.AddMemoryCache();
             services.AddDistributedMemoryCache();
+            services.AddMvc();
             services.AddSession(options=> 
             {
                 
@@ -35,7 +39,7 @@ namespace MysportShop
                 options.Cookie.IsEssential = true;
                 
             });
-            services.AddMvc();
+            
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -59,7 +63,8 @@ namespace MysportShop
             name: "default",
             template: "{controller=Product}/{action=List}/{id?}");
             });
-            SeedData.EnsurePopulated(app);
+            //SeedData.EnsurePopulated(app);
+            
             
         }
     }

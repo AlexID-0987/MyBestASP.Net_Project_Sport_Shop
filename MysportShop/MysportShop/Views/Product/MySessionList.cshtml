@@ -1,4 +1,6 @@
 ﻿@model MysportShop.Models.CartIndexViewModel
+@addTagHelper *,Microsoft.AspNetCore.Mvc.TagHelpers
+
 @{
     ViewData["Title"] = "MySessionList";
 }
@@ -32,17 +34,22 @@
                     <td>@listIt.Quantity</td>
                     <td>@listIt.SummaOnsetProduct.ToString("c")</td>
                     <td>
-                       <a href="~/Product/RemoveElement/@listIt.Id">Remove</a>
+                        <a href="~/Product/RemoveElement/@listIt.Id" class="btn btn-danger">Remove</a>
                     </td>
                 </tr>
+
             }
-            
+
         </tbody>
     </table>
-    
+
     <a href="List">List</a>
 </div>
 <div style="text-align:center">
     <h1>Total summa:</h1>
     <h1>@Model.BuyUseSession.TotalValue().ToString("c")</h1>
+</div>
+<div>
+    
+    <a href="OrderProduct">Order</a>
 </div>

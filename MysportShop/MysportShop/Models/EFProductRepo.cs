@@ -13,5 +13,13 @@ namespace MysportShop.Models
             context = productDb;
         }
         public IQueryable<MyProduct> _Products => context.Products;
+        public IQueryable<MyOrder> _MyOrders => context.myOrders;
+        
+       public void SaveOrderTable(MyOrder myOrder)
+        {
+            context.myOrders.Add(myOrder);
+            context.SaveChanges();
+        }
+        
     }
 }

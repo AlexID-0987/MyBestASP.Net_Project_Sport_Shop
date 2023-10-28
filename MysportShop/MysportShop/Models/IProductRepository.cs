@@ -8,6 +8,10 @@ namespace MysportShop.Models
     public interface IProductRepository
     {
         IQueryable<MyProduct> _Products { get; }
+        IQueryable<MyOrder> _MyOrders { get; }
+        void SaveOrderTable(MyOrder myOrder);
+
+        
     }
 }
 //інтерфейс працюючій з базой данних, схожий на IEnumerable<>
