@@ -21,7 +21,7 @@ namespace MysportShop.Models
                     InfoWithProduct = infoproduct,
                     Price = price,
                     Categories = categories,
-                    Quantity = quantity,
+                    Quantity = quantity, 
                     SummaOnsetProduct = BuyProduct.QuantityToPrice(price,quantity)
 
                 });
@@ -47,6 +47,6 @@ namespace MysportShop.Models
         
 
 
-        public IEnumerable<BuyProduct> BuyProducts => buyProductsList;
+        public virtual IEnumerable<BuyProduct> BuyProducts => buyProductsList;
     }
 }

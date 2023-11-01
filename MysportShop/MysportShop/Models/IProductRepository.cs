@@ -9,8 +9,9 @@ namespace MysportShop.Models
     {
         IQueryable<MyProduct> _Products { get; }
         IQueryable<MyOrder> _MyOrders { get; }
+        
         void SaveOrderTable(MyOrder myOrder);
-
+        
         
     }
 }

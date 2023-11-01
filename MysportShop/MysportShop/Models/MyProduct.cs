@@ -14,6 +14,7 @@ namespace MysportShop.Models
         public string InfoWithProduct { get; set; }
         public decimal Price { get; set; }
         public string Categories { get; set; }
+        
     }
 }
 //create model product

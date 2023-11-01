@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using MysportShop.Models;
 
 namespace MysportShop.Migrations
 {
     [DbContext(typeof(ProductDbContext))]
-    partial class ProductDbContextModelSnapshot : ModelSnapshot
+    [Migration("20231031192356_My class Ses")]
+    partial class MyclassSes
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -60,6 +62,25 @@ namespace MysportShop.Migrations
                     b.HasDiscriminator<string>("Discriminator").HasValue("MyProduct");
                 });
 
+            modelBuilder.Entity("MysportShop.Models.SaveSessionData", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int?>("BuyProductId");
+
+                    b.Property<int?>("MyOrderId");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("BuyProductId");
+
+                    b.HasIndex("MyOrderId");
+
+                    b.ToTable("saveSessionDatas");
+                });
+
             modelBuilder.Entity("MysportShop.Models.BuyProduct", b =>
                 {
                     b.HasBaseType("MysportShop.Models.MyProduct");
@@ -79,6 +100,17 @@ namespace MysportShop.Migrations
                     b.ToTable("BuyProduct");
 
                     b.HasDiscriminator().HasValue("BuyProduct");
+                });
+
+            modelBuilder.Entity("MysportShop.Models.SaveSessionData", b =>
+                {
+                    b.HasOne("MysportShop.Models.BuyProduct", "BuyProduct")
+                        .WithMany()
+                        .HasForeignKey("BuyProductId");
+
+                    b.HasOne("MysportShop.Models.MyOrder", "MyOrder")
+                        .WithMany()
+                        .HasForeignKey("MyOrderId");
                 });
 
             modelBuilder.Entity("MysportShop.Models.BuyProduct", b =>

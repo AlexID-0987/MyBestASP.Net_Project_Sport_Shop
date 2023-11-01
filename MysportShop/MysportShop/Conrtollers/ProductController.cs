@@ -18,7 +18,7 @@ namespace MysportShop.Conrtollers
     {
         private IProductRepository product;
         private IBuyRepository buyRepository;
-        private BuyUseSession BuyUseSession;
+        public BuyUseSession BuyUseSession;
         
         
         
@@ -157,20 +157,28 @@ namespace MysportShop.Conrtollers
         }
         public IActionResult OrderProduct()
         {
-            var Cart = GetCart();
+            var item = GetCart();
+            var it = item.BuyProducts.ToList();
+            ViewBag.c = it;
             
             return View();
         }
         
             
         [HttpPost]
-        public async Task <IActionResult> OrderProduct(MyOrder order)
+        public IActionResult OrderProduct(MyOrder order)
         {
-            product.SaveOrderTable(order);
+            
+            
+                
+                product.SaveOrderTable(order);
+            
+            
+
             return Redirect ("List");
 
         }
-        
+         
 
         private BuyUseSession GetCart()
         {

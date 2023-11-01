@@ -5,9 +5,9 @@ using System.Threading.Tasks;
 
 namespace MysportShop.Models
 {
-    public interface IBuyRepository
+    public class BuyOrderDataBase
     {
-        IQueryable<BuyProduct> _buyProducts { get; }
-
+        public int Id { get; set;}
+        public BuyProduct BuyProduct { get; set; }
     }
 }

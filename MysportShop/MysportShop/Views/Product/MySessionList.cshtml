@@ -25,18 +25,20 @@
 
             @foreach (var listIt in Model.BuyUseSession.BuyProducts)
             {
-                <tr>
-                    <td>@listIt.Id</td>
-                    <td>@listIt.NameProduct</td>
-                    <td>@listIt.InfoWithProduct</td>
-                    <td>@listIt.Price.ToString("c")</td>
-                    <td>@listIt.Categories</td>
-                    <td>@listIt.Quantity</td>
-                    <td>@listIt.SummaOnsetProduct.ToString("c")</td>
-                    <td>
-                        <a href="~/Product/RemoveElement/@listIt.Id" class="btn btn-danger">Remove</a>
-                    </td>
-                </tr>
+            <tr>
+
+                <td>@listIt.Id</td>
+                <td>@listIt.NameProduct</td>
+                <td>@listIt.InfoWithProduct</td>
+                <td>@listIt.Price.ToString("c")</td>
+                <td>@listIt.Categories</td>
+                <td>@listIt.Quantity</td>
+                <td>@listIt.SummaOnsetProduct.ToString("c")</td>
+                <td>
+                    <a href="~/Product/RemoveElement/@listIt.Id" class="btn btn-danger">Remove</a>
+                </td>
+                
+            </tr>
 
             }
 

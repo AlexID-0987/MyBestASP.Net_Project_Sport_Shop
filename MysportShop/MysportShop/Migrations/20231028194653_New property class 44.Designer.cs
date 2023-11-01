@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using MysportShop.Models;
 
 namespace MysportShop.Migrations
 {
     [DbContext(typeof(ProductDbContext))]
-    partial class ProductDbContextModelSnapshot : ModelSnapshot
+    [Migration("20231028194653_New property class 44")]
+    partial class Newpropertyclass44
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -44,10 +46,9 @@ namespace MysportShop.Migrations
 
                     b.Property<string>("Categories");
 
-                    b.Property<string>("Discriminator")
-                        .IsRequired();
-
                     b.Property<string>("InfoWithProduct");
+
+                    b.Property<int?>("MyOrderId");
 
                     b.Property<string>("NameProduct");
 
@@ -55,41 +56,16 @@ namespace MysportShop.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Products");
-
-                    b.HasDiscriminator<string>("Discriminator").HasValue("MyProduct");
-                });
-
-            modelBuilder.Entity("MysportShop.Models.BuyProduct", b =>
-                {
-                    b.HasBaseType("MysportShop.Models.MyProduct");
-
-                    b.Property<int?>("MyOrderId");
-
-                    b.Property<int?>("MyProductId");
-
-                    b.Property<int>("Quantity");
-
-                    b.Property<decimal>("SummaOnsetProduct");
-
                     b.HasIndex("MyOrderId");
 
-                    b.HasIndex("MyProductId");
-
-                    b.ToTable("BuyProduct");
-
-                    b.HasDiscriminator().HasValue("BuyProduct");
+                    b.ToTable("Products");
                 });
 
-            modelBuilder.Entity("MysportShop.Models.BuyProduct", b =>
+            modelBuilder.Entity("MysportShop.Models.MyProduct", b =>
                 {
                     b.HasOne("MysportShop.Models.MyOrder")
                         .WithMany("Buys")
                         .HasForeignKey("MyOrderId");
-
-                    b.HasOne("MysportShop.Models.MyProduct", "MyProduct")
-                        .WithMany()
-                        .HasForeignKey("MyProductId");
                 });
 #pragma warning restore 612, 618
         }

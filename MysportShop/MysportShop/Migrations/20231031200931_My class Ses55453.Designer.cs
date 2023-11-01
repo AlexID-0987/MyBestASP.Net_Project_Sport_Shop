@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using MysportShop.Models;
 
 namespace MysportShop.Migrations
 {
     [DbContext(typeof(ProductDbContext))]
-    partial class ProductDbContextModelSnapshot : ModelSnapshot
+    [Migration("20231031200931_My class Ses55453")]
+    partial class MyclassSes55453
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -83,7 +85,7 @@ namespace MysportShop.Migrations
 
             modelBuilder.Entity("MysportShop.Models.BuyProduct", b =>
                 {
-                    b.HasOne("MysportShop.Models.MyOrder")
+                    b.HasOne("MysportShop.Models.MyOrder", "MyOrder")
                         .WithMany("Buys")
                         .HasForeignKey("MyOrderId");
 

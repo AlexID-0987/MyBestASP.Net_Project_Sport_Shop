@@ -3,21 +3,38 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using MysportShop.Models;
 
 namespace MysportShop.Migrations
 {
     [DbContext(typeof(ProductDbContext))]
-    partial class ProductDbContextModelSnapshot : ModelSnapshot
+    [Migration("20231028181322_New property class buyOrder")]
+    partial class NewpropertyclassbuyOrder
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
                 .HasAnnotation("ProductVersion", "2.1.14-servicing-32113")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+            modelBuilder.Entity("MysportShop.Models.BuyOrderDataBase", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int?>("BuyProductId");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("BuyProductId");
+
+                    b.ToTable("buyOrderDataBases");
+                });
 
             modelBuilder.Entity("MysportShop.Models.MyOrder", b =>
                 {
@@ -66,19 +83,22 @@ namespace MysportShop.Migrations
 
                     b.Property<int?>("MyOrderId");
 
-                    b.Property<int?>("MyProductId");
-
                     b.Property<int>("Quantity");
 
                     b.Property<decimal>("SummaOnsetProduct");
 
                     b.HasIndex("MyOrderId");
 
-                    b.HasIndex("MyProductId");
-
                     b.ToTable("BuyProduct");
 
                     b.HasDiscriminator().HasValue("BuyProduct");
+                });
+
+            modelBuilder.Entity("MysportShop.Models.BuyOrderDataBase", b =>
+                {
+                    b.HasOne("MysportShop.Models.BuyProduct", "BuyProduct")
+                        .WithMany()
+                        .HasForeignKey("BuyProductId");
                 });
 
             modelBuilder.Entity("MysportShop.Models.BuyProduct", b =>
@@ -86,10 +106,6 @@ namespace MysportShop.Migrations
                     b.HasOne("MysportShop.Models.MyOrder")
                         .WithMany("Buys")
                         .HasForeignKey("MyOrderId");
-
-                    b.HasOne("MysportShop.Models.MyProduct", "MyProduct")
-                        .WithMany()
-                        .HasForeignKey("MyProductId");
                 });
 #pragma warning restore 612, 618
         }
