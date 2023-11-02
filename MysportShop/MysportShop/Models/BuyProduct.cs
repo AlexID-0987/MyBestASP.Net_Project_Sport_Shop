@@ -10,7 +10,7 @@ namespace MysportShop.Models
         
         public int Quantity { get; set; } = 1;
         public decimal SummaOnsetProduct { get; set; }
-        public MyProduct MyProduct { get; set; }
+        
         public decimal QuantityToPrice(decimal price, int quantity)
         {
             return price * quantity;

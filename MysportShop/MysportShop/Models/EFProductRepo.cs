@@ -6,34 +6,21 @@ using System.Threading.Tasks;
 
 namespace MysportShop.Models
 {
-    public class EFProductRepo:IProductRepository
+    public class EFProductRepo : IProductRepository
     {
         private ProductDbContext context;
-        
+
         public EFProductRepo(ProductDbContext productDb)
         {
             context = productDb;
-            
+
         }
-        public IQueryable<MyProduct> _Products => context.Products;
-        public IQueryable<MyOrder> _MyOrders => context.myOrders
-            .Include(a => a.Buys)
-            .ThenInclude(l => l.MyProduct);
-
-        
-            
-        
-            
-        
-       public void SaveOrderTable(MyOrder myOrder)
+        public void Save()
         {
-
-            
-                context.myOrders.Add(myOrder);
-            
-            
+            context.Products.Add(new MyProduct { NameProduct = "Board56", InfoWithProduct = "My favorite6", Price = 46785675, Categories = "Sport two" });
             context.SaveChanges();
         }
-      
+            
+       public IQueryable<MyProduct> _Products => context.Products;
     }
 }

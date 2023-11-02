@@ -24,8 +24,8 @@ namespace MysportShop
             options.UseSqlServer(
                Configuration["Data:SportStore:DefaultConnection"]));
             services.AddTransient<IProductRepository, EFProductRepo>();
-            services.AddDbContext<ProductDbContext>(options =>
-            options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+            //services.AddDbContext<ProductDbContext>(options =>
+            //options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
 
 
             services.AddMemoryCache();
@@ -63,7 +63,7 @@ namespace MysportShop
             name: "default",
             template: "{controller=Product}/{action=List}/{id?}");
             });
-            SeedData.EnsurePopulated(app);
+            //SeedData.EnsurePopulated(app);
             
             
         }

@@ -47,7 +47,7 @@ namespace MysportShop.Conrtollers
         
         public async Task <IActionResult> List(string category,int page = 1)
         {
-
+            
             var item1 = product._Products.ToList();
             var count = item1.Count();
             Mycategories s = new Mycategories();
@@ -157,27 +157,15 @@ namespace MysportShop.Conrtollers
         }
         public IActionResult OrderProduct()
         {
-            var item = GetCart();
-            var it = item.BuyProducts.ToList();
-            ViewBag.c = it;
+            
+            
             
             return View();
         }
         
             
         [HttpPost]
-        public IActionResult OrderProduct(MyOrder order)
-        {
-            
-            
-                
-                product.SaveOrderTable(order);
-            
-            
-
-            return Redirect ("List");
-
-        }
+        
          
 
         private BuyUseSession GetCart()

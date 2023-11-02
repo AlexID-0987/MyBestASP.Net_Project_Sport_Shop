@@ -11,7 +11,7 @@ namespace MysportShop.Models
         
         public ProductDbContext(DbContextOptions<ProductDbContext> options) : base(options) { Database.EnsureCreated(); }
         public DbSet<MyProduct> Products { get; set; }
-        public DbSet<MyOrder> myOrders { get; set; }
+        
         
 
     }
