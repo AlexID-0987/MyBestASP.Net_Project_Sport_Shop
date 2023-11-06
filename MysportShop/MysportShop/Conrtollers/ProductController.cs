@@ -51,7 +51,8 @@ namespace MysportShop.Conrtollers
             var item1 = product._Products.ToList();
             var count = item1.Count();
             Mycategories s = new Mycategories();
-            
+            //product.Save();
+
             int size = 2;
             var pag1 = item1.Where(p=>category==null||p.Categories==category).Skip((page - 1) * size).Take(size).ToList();
             Pagination pagination1 = new Pagination(count, page, size);
@@ -113,7 +114,10 @@ namespace MysportShop.Conrtollers
             ViewBag.Quantity = quantity;
             return View(oneproduct);
         }
-        public decimal summa;
+        public IActionResult Order()
+        {
+            return View();
+        }
         
         [HttpPost]
         public IActionResult Order(int id, BuyProduct buyProduct)
@@ -157,15 +161,22 @@ namespace MysportShop.Conrtollers
         }
         public IActionResult OrderProduct()
         {
-            
-            
+
+            var cart = GetCart();
+            var myList = cart.BuyProducts.ToList();
+            ViewBag.s = myList;
             
             return View();
         }
-        
-            
+
+         
         [HttpPost]
-        
+        public IActionResult orderProduct(MyOrder myOrder )
+        {
+            
+            product.OrderSave(myOrder);
+            return View( );
+        }
          
 
         private BuyUseSession GetCart()

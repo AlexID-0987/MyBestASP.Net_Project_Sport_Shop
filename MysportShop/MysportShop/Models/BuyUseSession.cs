@@ -9,20 +9,21 @@ namespace MysportShop.Models
     {
         private List<BuyProduct> buyProductsList = new List<BuyProduct>();
         BuyProduct BuyProduct = new BuyProduct();
-        public void AddItemMyProduct(int id, string nameProduct,string infoproduct, decimal price, string categories, int quantity, decimal summa)
+        public void AddItemMyProduct(int id, string nameProduct, string infoproduct, decimal price, string categories, int quantity, decimal summa)
         {
-            BuyProduct buy = buyProductsList.Where(a => a.Id == id).FirstOrDefault();
+            
+            BuyProduct buy = buyProductsList.Where(a =>a.Id == id).FirstOrDefault();
             if (buy == null)
             {
                 buyProductsList.Add(new BuyProduct()
                 {
-                    Id = id,
-                    NameProduct = nameProduct,
-                    InfoWithProduct = infoproduct,
-                    Price = price,
-                    Categories = categories,
-                    Quantity = quantity, 
-                    SummaOnsetProduct = BuyProduct.QuantityToPrice(price,quantity)
+                    Id=id,
+                    NameProduct=nameProduct,
+                    InfoWithProduct=infoproduct,
+                    Price=price,
+                    Categories=categories,
+                    Quantity = quantity,
+                    SummaOnsetProduct = BuyProduct.QuantityToPrice(price, quantity)
 
                 });
             }
@@ -30,12 +31,12 @@ namespace MysportShop.Models
             {
                 buy.Quantity += quantity;
                 buy.SummaOnsetProduct += price;
-                
+
             }
-            
         }
-        
-        public void Removecart(int id)
+
+
+            public void Removecart(int id)
         {
             
             
